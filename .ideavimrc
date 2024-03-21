@@ -1,0 +1,79 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+source ~/_vimrc
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" Plugins
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+Plug 'vim-airline/vim-airline'
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+set NERDTree
+" Plugins END
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"Map \r to the Reformat Code action
+map <leader>RFC <Action>(ReformatCode)
+"map <leader>fc <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+map <leader>rd <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+" set relativenumber
+set number
+
+map <leader>FIP <Action>(FindInPath)
+
+command! FIP action FindInPath
+map <leader>t <Action>(GoToImplementation)
+
+map g] <Action>(GoToImplementation)
+
+map <leader>rd <Action>(Debug)
+" 最近访问的文件
+map <leader>rf <Action>(RecentFiles)
+map <leader>BP <Action>(Back)
+map <leader>RE <Action>(RenameElement)
+
+map <leader>vp <Action>(Vcs.Push)
+map <leader>GTI <Action>(GotoImplementation)
+map <leader>e <Action>(GotoNextError)
+"set clipboard+=unnamed
+
+" 使用 leader+w直接保存
+inoremap <leader>w <Esc>:w<CR>
+nnoremap <leader>w :w<CR>
+" 搜索高亮
+set hlsearch
+
+" 直接从系统剪切板黏贴
+nnoremap <leader>SP "+p
+" 直接复制到系统剪切板
+nnoremap <leader>SY "+y
+nnoremap <leader>SYY "+yy
+:map \i <Action>(ShowHoverInfo)
+
+command! Debug action Debug
+command! SIPV action SelectInProjectView
+
+" Vim脚本示例
+nmap <leader>I :call Praise("IdeaVim")<CR>
+function! Praise(name)
+  echo a:name .. " is good"
+endfunction
